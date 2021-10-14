@@ -28,7 +28,7 @@
 
 	<h1>Darek Charlet builds a stack</h1>
 
-	<input type="text" id="new" value="input new element here">
+	<input type="text" id="input" value="input new element here">
 
 	<div class="flex-container" id="target">
 		<div class="stack">row item 1</div>   
@@ -39,14 +39,38 @@
 	<p> Press the button to create an new element of type div and then add it to the container.</p>
 
 	<button onclick="makeNewDiv()">Push Value</button>
+	<button onclick="popItem()">Pop</button>
+	<button onclick="zap()">Zap values</button>
 	
 	
 </body>
 <script>
+
+	function zap(){
+		let stackItems = document.getElementsByClassName("stack");
+		let input = document.getElementById("input");
+
+		for (const item of stackItems) {
+			if(item.innerHTML == input.value){
+				console.log("Removed: " + item.innerHTML);
+				popItem(item);
+			}
+		}
+	}
+
+	function popItem(){
+		let stackItems = document.getElementsByClassName("stack");
+		let lenStack = stackItems.length;
+		if(lenStack != 0){
+			stackItems[lenStack-1].remove();
+		}
+	}
+
 	function makeNewDiv(){
 		/* make the div and its text */
 		let element = document.createElement("div");
-		let input = document.getElementById("new");
+		element.className = "stack";
+		let input = document.getElementById("input");
 		element.innerHTML = input.value;
 
 		/* add it to the container */
